@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>TodoList App</title>
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="{% static 'todolist/bs/css/flatly.min.css' %}" />
+		<link rel="stylesheet" href="{% static 'todolist/styles.css' %}" />	
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">	
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville|Source+Sans+Pro&display=swap">
+	</head>
+	<body>
+		<div class="content">
+			<h1>Tasks Board</h1>
+			<h3>Fill the form fields and click Add button to add new task to the board</h3>	
+			<form action="{% url 'add' %}" method="POST" role="form">
+				{% csrf_token %}					
+				<div class="form-group">
+					<div class="input-group">
+						{{ form.name}}
+					</div>	
+					</br>
+					<div class="input-group">	
+						{{ form.description}}	
+					</div>	
+					</br>				  
+					  <span class="input-group-btn">
+						  <button type="submit" class="btn btn-default" id="add-btn">ADD</button>
+					  </span>
+				</div>
+			</form>
+			<h3>Board</h3>
+			<div class="btn-toolbar">
+				<div class="btn-group">
+					<a href="{% url 'deletedonetasks'%}">
+					<button type="button" class="btn btn-warning">
+						<i class="glyphicon glyphicon-trash"></i> DELETE DONE TASKS
+					</button></a>
+				</div>
+				<div class="btn-group">
+						<a href="{% url 'deleteall' %}">
+					<button type="button" class="btn btn-danger">
+						<i class="glyphicon glyphicon-trash"></i> DELETE ALL TASKS
+					</button></a>
+				</div>
+			</div>
+			</br>
+			<table class="tablecenterCSS table table-hover table-bordered">
+			  <thead>
+			    <tr>
+			      <th scope="col">Task Name</th>
+			      <th scope="col">Task Description</th>
+			      <th scope="col">Status</th>
+			      <th scope="col">Set status to In Progress</th>
+			      <th scope="col">Set status to In Done</th>
+			      <th scope="col">Delete</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    {% for todolist in todo_items %}
+			    <tr>
+			      <td>{{ todolist.name }}</td>
+			      <td>{{ todolist.description }}</td>
+			      <td>{{ todolist.status }}</td>
+			      <td><a class="btn btn-primary" href="{% url 'setstatustoinprogress' todolist.id %}" role="button">Set status to In Progress</a></td>
+			      <td><a class="btn btn-warning" href="{% url 'setstatustodone' todolist.id %}" role="button">Set status to Done</a></td>
+			      <td><a class="btn btn-danger" href="{% url 'deletetask' todolist.id %}" role="button">Delete Task</a></td>
+			    </tr>
+			    {% endfor %}
+			  </tbody>
+			</table>
+		</div>
+	</body>
+</html>
