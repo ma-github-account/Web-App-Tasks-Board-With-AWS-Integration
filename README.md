@@ -9,8 +9,8 @@ The folder contains two versions of application: basic one run locally and aws i
 
 Prerequisites:
 
-Python 3.9.7,
-Django 4.1.2,
+- Python 3.9.7,
+- Django 4.1.2,
 
 How to run: 1.python manage.py makemigrations 2.python manage.py migrate 3.python manage.py runserver
 
@@ -33,3 +33,26 @@ Elastic Beanstalk commands to deploy the application:
 1.eb init
 2.eb create
 3.eb deploy (in case the changes were made and the application needs to be updated in EB)
+
+![1](https://github.com/user-attachments/assets/cf4392f6-605e-43d9-8626-908e1cc435fb)
+
+
+
+![2](https://github.com/user-attachments/assets/310cf614-b14c-4176-a867-738f55977544)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
